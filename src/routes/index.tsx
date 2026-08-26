@@ -42,6 +42,7 @@ function Dashboard() {
 
   const view = useMemo(() => {
     if (!data?.plan) return null;
+    try {
     const plan = data.plan;
     const derived = derivarEntries(plan, data.entries);
     const passed = derived.length;
@@ -131,6 +132,10 @@ function Dashboard() {
       distanciaRS, mesesRestantes, streak,
       chegada, pace,
     };
+    } catch (err) {
+      console.error("Dashboard useMemo error:", err);
+      return null;
+    }
   }, [data]);
 
   if (!ready || !view) {

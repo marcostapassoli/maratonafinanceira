@@ -75,8 +75,10 @@ export function chegadaPrevistaDe(
 ): { ref: string; idade: number; meses: number } | null {
   const meses = mesesAteMetaDe(plan, plan.taxaAnual, patrimonioAtual);
   if (meses === null) return null;
-  const inicio = new Date(plan.dataInicio);
-  const target = new Date(inicio.getFullYear(), inicio.getMonth() + meses, 1);
+  // mesesAteMetaDe conta a partir do patrimônio ATUAL, então a data de
+  // chegada deve ser hoje + meses (não dataInicio + meses).
+  const now = new Date();
+  const target = new Date(now.getFullYear(), now.getMonth() + meses, 1);
   const ref = `${target.getFullYear()}-${String(target.getMonth() + 1).padStart(2, "0")}`;
   const [by, bm] = plan.dataNascimento.split("-").map(Number);
   const idadeMeses =
@@ -111,8 +113,10 @@ export function chegadaPrevistaAlvo(
     if (s >= alvo) { mesesAchados = m; break; }
   }
   if (mesesAchados === null) return null;
-  const inicio = new Date(plan.dataInicio);
-  const target = new Date(inicio.getFullYear(), inicio.getMonth() + mesesAchados, 1);
+  // mesesAchados conta a partir do patrimônio inicial informado, então a
+  // data de chegada deve ser hoje + meses (não dataInicio + meses).
+  const now = new Date();
+  const target = new Date(now.getFullYear(), now.getMonth() + mesesAchados, 1);
   const ref = `${target.getFullYear()}-${String(target.getMonth() + 1).padStart(2, "0")}`;
   const [by, bm] = plan.dataNascimento.split("-").map(Number);
   const idadeMeses =
