@@ -249,8 +249,10 @@ function Dashboard() {
           <h2 className="mt-3 text-2xl sm:text-3xl font-bold tracking-tight leading-snug">
             {chegada
               ? <>No ritmo atual, você se aposenta aos{" "}
-                  <span className="text-primary tabular-nums">{chegada.idade.toFixed(1)} anos</span>
-                  <span className="text-muted-foreground font-medium"> — em {formatRef(chegada.ref)}.</span>
+                  <span className="text-primary tabular-nums">{chegada.idade.toFixed(1)} anos</span>{" "}
+                  <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2 py-0.5 text-sm font-semibold text-primary align-middle">
+                    {formatRef(chegada.ref)}
+                  </span>
                 </>
               : <>Vamos traçar quando sua aposentadoria pode acontecer.</>}
           </h2>
